@@ -1,4 +1,6 @@
 #include "libmain.h"
+#include "historicList.h"
+
 
 
 #define MAX_LEN 256
@@ -16,17 +18,29 @@ int main(int argc, char **argv){
 	bool terminado;
 	int partes;
 
+	createEmptyListHistoric();
+	assert(isEmptyList());
+	insertItem("hola que tal");
+	insertItem("vale");
+	posHistorico m = first();
+	posHistorico l = next(m);
+	printf("%s", l->data);
+	deleteListHistoric();
+	assert(isEmptyList());
 	
-	/*
+#ifdef INIT_SHELL
 	while(!terminado){
 		prompt();
-		leerEntrada(); //leemos entrada y comandos aqui 
+		partes = leerEntrada(comando, partes_comando);
+		//procesamos la en
+		proces
 		
 	}
-	*/
-	prompt();
-	partes = leerEntrada(comando, partes_comando);
+#endif //INIT_SHELL
+	
+	
 
+#ifdef DEBUG
 	if(partes){
 		for(int i = 0; i < MAX_ARG && partes_comando[i] != NULL; i++){
 			printf("EL : %s\n", partes_comando[i]);
@@ -34,6 +48,8 @@ int main(int argc, char **argv){
 	}else{
 		printf("Error");
 	}
+#endif //DEBUG
+
 	return 0;
 }
 
@@ -81,7 +97,9 @@ int leerEntrada(char comando[], char *partes_comando[]){
 	return 1;
 }
 
-void prompt(void){
 
+
+
+void prompt(void){
 	fprintf(stdout, "$>");
 }
