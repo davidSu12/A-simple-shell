@@ -86,5 +86,11 @@ void open_aux(char comando[], char *partes_comando[]);
 void close_df(char comando[], char *partes_comando[]);
 void dup_aux(char comando[], char *partes_comando[]);
 void infosys(char comando[], char *partes_comando[]);
-void help_cmd(char comando[], char *partes_comando[]);
-void quit();
+
+void help_cmd(char comando[], char *partes_comando[]){
+	return;
+}
+
+void quit(){
+	exit(EXIT_SUCCESS);
+}
