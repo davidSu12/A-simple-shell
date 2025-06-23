@@ -103,7 +103,7 @@ bool insertItem(const char * cadena, const char * partes_cadena[]){
 	posHistorico i;
 	if(temp){
 		strcpy(temp -> data, cadena);
-		memcpy(temp -> data_parts, partes_cadena, sizeof(partes_cadena));
+		memcpy(temp -> data_parts, partes_cadena, sizeof(temp -> data_parts));
 		temp -> next = LNULL;
 
 		if(isEmptyList()){

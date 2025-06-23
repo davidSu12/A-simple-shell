@@ -9,14 +9,16 @@ void authors(char comando[], char *partes_comando[]){
 	const char * name = "david suarez";
 	const char * email = "aux@gmail.com";
 
+	printf("Estoy en authors");
 	const char * opt = partes_comando[1];
-	if(!strcmp(opt, "-l")){
-		fprintf(stdout, "%s\n", email);
+	if(!opt){
+		fprintf(stdout, "%s\n%s\n", name, email);
 	}else if(!strcmp(opt, "-n")){
 		fprintf(stdout, "%s\n", name);
-	}else if(!opt){
+	}else if(!strcmp(opt, "-l")){
+		fprintf(stdout, "%s\n", email);
 		//en este caso opt es nulo y por ende imprimimos toda la informacion
-		fprintf(stdout, "%s\n%s\n", name, email);
+		
 	}else{
 		fprintf(stderr, "An unknown option has been introduced in authors\n");
 	}

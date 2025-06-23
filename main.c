@@ -12,11 +12,12 @@
 int main(int argc, char **argv){
 
 
-	char comando[MAX_LEN];
+	char comando[MAX_LEN] = {'\0'};
 	char *partes_comando[MAX_ARG] = {NULL};
 
-	bool terminado;
+	bool terminado = false;
 	int partes;
+
 
 
 #ifdef INIT_SHELL
@@ -28,8 +29,7 @@ int main(int argc, char **argv){
 		
 	}
 #endif //INIT_SHELL
-	
-	
+
 
 #ifdef DEBUG
 	if(partes){

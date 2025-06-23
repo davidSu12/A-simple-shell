@@ -24,12 +24,11 @@ static struct {
 
 
 
-static int obtain_code_command(char *partes_comando){
-	const char *comando_codigo = partes_comando[0];
+static int obtain_code_command(char *command){
 	int i;
 
 	for(i = 0; comandos[i].comando != NULL; i++){
-		if(!strcmp(comando_codigo, comandos[i].comando)){
+		if(!strcmp(command, comandos[i].comando)){
 			return i; 
 		}
 	}
@@ -42,10 +41,14 @@ static int obtain_code_command(char *partes_comando){
 
 void procesarEntrada(char comando[], char *partes_comando[]){
 	
-	const char * command = partes_comando[0];
+	char * command = partes_comando[0];
 	int codigo_comando = obtain_code_command(command);
 	
-
+	if(codigo_comando == -1){
+		printf("%s\n", command);
+		perror("An error has courred");
+		exit(EXIT_FAILURE);
+	}
 	switch(codigo_comando){
 		//aqui es donde ejecutamos el comando
 		case 0://authors
@@ -113,11 +116,9 @@ int leerEntrada(char comando[], char *partes_comando[]){
 			pivot = fin - comando;
 		}else{
 
-			if(*ini == '\n') continue;
-
+			fin = strchr(comando + pivot, '\n');
+			*fin='\0';
 			//we finished to read the entry
-			fin = ini;
-			while(*(++fin));
 			partes_comando[i] = ini;
 
 		}
