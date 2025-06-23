@@ -23,7 +23,6 @@ struct node{
 typedef struct node * posHistorico;
 typedef posHistorico listaHistorico;
 
-static listaHistorico lista;
 
 void createEmptyList();
 bool insertItem(const char * cadena);
@@ -34,7 +33,7 @@ posHIstorico previous(posHistorico position);
 posHistorico first();
 posHistorico last();
 item * getItem(posHistorico position);
-
+bool isEmptyList();
 
 
 
