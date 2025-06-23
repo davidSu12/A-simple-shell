@@ -72,7 +72,7 @@ void procesarEntrada(char comando[], char *partes_comando[]){
 		case 8://dup
 			break;	
 		case 9://infosys
-			infosys(comando, partes_comando);
+			infosys();
 			break;
 		case 10://help
 			help_cmd(comando, partes_comando);
