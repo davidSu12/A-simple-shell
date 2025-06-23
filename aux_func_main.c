@@ -1,6 +1,5 @@
 #include "aux_func_main.h"
-
-
+#include "commands.h"
 
 static struct {
 	char * comando;
@@ -26,7 +25,7 @@ static struct {
 
 
 static int obtain_code_command(char *partes_comando){
-	const char *comando_codigo = partes_comando[1];
+	const char *comando_codigo = partes_comando[0];
 	int i;
 
 	for(i = 0; comandos[i].comando != NULL; i++){
@@ -42,7 +41,47 @@ static int obtain_code_command(char *partes_comando){
 
 
 void procesarEntrada(char comando[], char *partes_comando[]){
-	//aqui es donde elegimos basicamente el comando a buscar
+	
+	const char * command = partes_comando[0];
+	int codigo_comando = obtain_code_command(command);
+	
+
+	switch(codigo_comando){
+		//aqui es donde ejecutamos el comando
+		case 0://authors
+			authors(comando, partes_comando);
+			break;
+		case 1://pid
+			pid();
+			break;
+		case 2://ppid
+			ppid();
+			break;
+		case 3://cd
+			cd(comando, partes_comando);
+			break;
+		case 4://date
+			date_aux(comando, partes_comando);
+			break;
+		case 5://historic
+			break;
+		case 6://open
+			break;
+		case 7://close
+			break;
+		case 8://dup
+			break;	
+		case 9://infosys
+			infosys(comando, partes_comando);
+			break;
+		case 10://help
+			help_cmd(comando, partes_comando);
+			break;
+		case 11:case 12:case 13: //quit
+			quit(); 
+			break;
+
+	}
 
 }
 
