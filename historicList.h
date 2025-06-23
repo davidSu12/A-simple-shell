@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #ifndef MAX_LEN
 #define MAX_LEN 256
@@ -34,6 +35,7 @@ posHistorico first();
 posHistorico last();
 item * getItem(posHistorico position);
 bool isEmptyList();
+void deleteListHistoric();
 
 
 
