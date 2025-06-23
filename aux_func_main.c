@@ -1,5 +1,46 @@
 #include "aux_func_main.h"
 
+
+
+static struct {
+	char * comando;
+	int code_command;
+} comandos[] = {
+	{"authors", 0},
+	{"pid", 1},
+	{"ppid", 2},
+	{"cd", 3},
+	{"date", 4},
+	{"historic", 5},
+	{"open", 6},
+	{"close", 7},
+	{"dup", 8},
+	{"infosys", 9},
+	{"help", 10},
+	{"bye", 11},
+	{"exit", 12},
+	{"quit", 13},
+	{NULL, -1}
+};
+
+
+
+static int obtain_code_command(char *partes_comando){
+	const char *comando_codigo = partes_comando[1];
+	int i;
+
+	for(i = 0; comandos[i].comando != NULL; i++){
+		if(!strcmp(comando_codigo, comandos[i].comando)){
+			return i; 
+		}
+	}
+	return -1; //CODIGO DE ERROR
+}
+
+
+
+
+
 void procesarEntrada(char comando[], char *partes_comando[]){
 	//aqui es donde elegimos basicamente el comando a buscar
 
