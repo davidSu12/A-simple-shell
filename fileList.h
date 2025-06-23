@@ -9,6 +9,10 @@
 
 #define MAX_FILE_LEN 20
 
+#ifndef NULLFILE
+#define NULLFILE -1
+#endif //NULLFILE
+
 typedef int type_fd;
 typedef unsigned int type_mode; 
 typedef int FileListPosition;
@@ -18,12 +22,12 @@ struct entry{
 	type_mode mode;
 };
 
-typedef struct entry item;
+typedef struct entry itemFile;
 
-typedef struct list{
-	item data[MAX_FILE_LEN];
+typedef struct FileList{
+	itemFile *data;
 	unsigned int top;
-} list;
+} FileList;
 
 
 
@@ -36,8 +40,8 @@ FileListPosition nextFileList(FileListPosition p);
 FileListPosition previousFileList(FileListPosition p);
 FileListPosition firstFileList();
 FileListPosition lastFileList();
-FileListPosition searchItem(type_fd fd);
-item getItem(type_fd fd);
+FileListPosition searchItemFileList(type_fd fd);
+itemFile getItemFileList(FileListPosition p);
 
 
 

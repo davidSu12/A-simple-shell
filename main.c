@@ -1,6 +1,7 @@
 #include "libmain.h"
 #include "historicList.h"
 #include "firstlib.h"
+#include "fileList.h"
 
 #define MAX_LEN 256
 #define MAX_ARG 32
@@ -17,6 +18,7 @@ int main(int argc, char **argv){
 	bool terminado;
 	int partes;
 
+	/*
 	createEmptyListHistoric();
 	assert(isEmptyList());
 	insertItem("hola que tal");
@@ -26,6 +28,7 @@ int main(int argc, char **argv){
 	printf("%s", l->data);
 	deleteListHistoric();
 	assert(isEmptyList());
+	*/
 	
 #ifdef INIT_SHELL
 	while(!terminado){
