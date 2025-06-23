@@ -39,4 +39,20 @@ void deleteListHistoric();
 
 
 
+	/*
+
+	debug messages
+	
+	createEmptyListHistoric();
+	assert(isEmptyList());
+	insertItem("hola que tal");
+	insertItem("vale");
+	posHistorico m = first();
+	posHistorico l = next(m);
+	printf("%s", l->data);
+	deleteListHistoric();
+	assert(isEmptyList());
+	*/
+	
+
 #endif //HISTORIC_LIST
