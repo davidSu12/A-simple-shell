@@ -9,6 +9,10 @@
 #ifndef MAX_LEN
 #define MAX_LEN 256
 #endif
+#ifndef MAX_ARG
+#define MAX_ARG 32
+#endif
+
 
 #define LNULL NULL
 
@@ -18,6 +22,7 @@ typedef char item;
 
 struct node{
 	item data[MAX_LEN];
+	item * data_parts[MAX_ARG]; 
 	struct node * next;
 };
 
@@ -26,7 +31,7 @@ typedef posHistorico listaHistorico;
 
 
 void createEmptyListHistoric();
-bool insertItem(const char * cadena);
+bool insertItem(const char * cadena, const char * partes_cadena[]);
 void deleteItem(const char * cadena);
 posHistorico searchItem(const char * cadena);
 posHistorico next(posHistorico position);
@@ -36,7 +41,8 @@ posHistorico last();
 item * getItem(posHistorico position);
 bool isEmptyList();
 void deleteListHistoric();
-
+void imprimirListaHistorico(int n);
+posHistorico buscarN(int n);
 
 
 	/*

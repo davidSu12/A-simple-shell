@@ -97,12 +97,13 @@ bool isEmptyList(){
 	return lista == LNULL; 
 }
 
-bool insertItem(const char * cadena){
+bool insertItem(const char * cadena, const char * partes_cadena[]){
 
 	posHistorico temp = malloc(sizeof(struct node));
 	posHistorico i;
 	if(temp){
 		strcpy(temp -> data, cadena);
+		memcpy(temp -> data_parts, partes_cadena, sizeof(partes_cadena));
 		temp -> next = LNULL;
 
 		if(isEmptyList()){
@@ -118,4 +119,38 @@ bool insertItem(const char * cadena){
 	fprintf(stderr, "Flushing historic list...\n");
 	deleteListHistoric();
 	return false;
+}
+
+void imprimirListaHistorico(int n){
+
+	posHistorico temp = lista;
+	int i = 0;
+
+	/*
+	si n = -1 imprimimos la lsita entera
+	en otro caso imprimimos los n-esimos primeros
+	*/
+
+	if(n == -1){
+		for(;temp != LNULL; temp = temp -> next){
+			printf("%d->%s\n",++i,temp->data);
+		}
+	}else{
+		for(;temp != LNULL && i <= n; temp = temp -> next){
+			printf("%d->%s\n",++i, temp->data);
+		}
+	}
+}
+
+posHistorico buscarN(int n){
+	posHistorico temp = lista;
+	int i = 0;
+
+	for(;temp != LNULL && i<n; temp = temp -> next) i++;
+	if(!temp){// n es mas grande que el tamaño total de la lista
+		return NULL;
+	}else{
+		return temp;
+	}
+
 }
