@@ -3,11 +3,16 @@
 #include "firstlib.h"
 #include "fileList.h"
 
-#define MAX_LEN 256
+#define MAX_ LEN 256
 #define MAX_ARG 32
+#define INIT_SHELL
 
 void prompt(void);
 int leerEntrada(char comando[], char *partes_comando[]);
+void procesarEntrada(char comando[], char *partes_comando[]);
+
+
+
 
 int main(int argc, char **argv){
 
@@ -18,24 +23,13 @@ int main(int argc, char **argv){
 	bool terminado;
 	int partes;
 
-	/*
-	createEmptyListHistoric();
-	assert(isEmptyList());
-	insertItem("hola que tal");
-	insertItem("vale");
-	posHistorico m = first();
-	posHistorico l = next(m);
-	printf("%s", l->data);
-	deleteListHistoric();
-	assert(isEmptyList());
-	*/
-	
+
 #ifdef INIT_SHELL
 	while(!terminado){
 		prompt();
 		partes = leerEntrada(comando, partes_comando);
 		//procesamos la en
-		proces
+		procesarEntrada()
 		
 	}
 #endif //INIT_SHELL
@@ -53,8 +47,12 @@ int main(int argc, char **argv){
 #endif //DEBUG
 
 	return 0;
-}
+} //end_main
 
+void procesarEntrada(char comando[], char *partes_comando[]){
+	//aqui es donde elegimos basicamente el comando a buscar
+
+}
 
 int leerEntrada(char comando[], char *partes_comando[]){
 
