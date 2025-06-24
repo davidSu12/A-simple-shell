@@ -17,7 +17,7 @@ fileList.o: fileList.c fileList.h
 	gcc -c fileList.c
 
 
-aux_func_main.o: aux_func_main.c aux_func_main.h
+aux_func_main.o: aux_func_main.c aux_func_main.h commands.h
 	gcc -c aux_func_main.c
 
 commands.o: commands.c commands.h 

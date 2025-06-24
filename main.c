@@ -4,10 +4,9 @@
 #include "fileList.h"
 #include "aux_func_main.h"
 
+
+
 #define INIT_SHELL
-
-
-
 
 int main(int argc, char **argv){
 
@@ -18,6 +17,15 @@ int main(int argc, char **argv){
 	bool terminado = false;
 	int partes;
 
+	createEmptyListHistoric();
+
+	/*ya tengo el error*/
+#ifdef DEBUG
+	prompt();
+	partes = leerEntrada(comando, partes_comando);
+	procesarEntrada(comando, partes_comando);
+
+#endif //DEBUG
 
 
 #ifdef INIT_SHELL
@@ -31,7 +39,7 @@ int main(int argc, char **argv){
 #endif //INIT_SHELL
 
 
-#ifdef DEBUG
+#ifdef DEBUG_1
 	if(partes){
 		for(int i = 0; i < MAX_ARG && partes_comando[i] != NULL; i++){
 			printf("EL : %s\n", partes_comando[i]);

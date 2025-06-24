@@ -9,7 +9,6 @@ void authors(char comando[], char *partes_comando[]){
 	const char * name = "david suarez";
 	const char * email = "aux@gmail.com";
 
-	printf("Estoy en authors");
 	const char * opt = partes_comando[1];
 	if(!opt){
 		fprintf(stdout, "%s\n%s\n", name, email);
@@ -57,7 +56,16 @@ void date_aux(char comando[], char *partes_comando[]){
 	time(&tiempo);
 	info_tiempo = localtime(&tiempo);
 
-	if(!strcmp(opt, "-t")){
+	if(!opt){
+		fprintf(stdout,
+			"%02d:%02d:%02d\n%02d/%02d/%04d\n", 
+			info_tiempo -> tm_hour,
+			info_tiempo -> tm_min,
+			info_tiempo -> tm_sec,
+			info_tiempo -> tm_mday,
+			info_tiempo -> tm_mon + 1,
+			info_tiempo -> tm_year + 1900); 
+	}else if(!strcmp(opt, "-t")){
 		fprintf(stdout,
 			"%02d:%02d:%02d\n", 
 			info_tiempo -> tm_hour,
@@ -70,48 +78,46 @@ void date_aux(char comando[], char *partes_comando[]){
 			info_tiempo -> tm_mon + 1,
 			info_tiempo -> tm_year + 1900);
 
-	}else if(!opt){
-			fprintf(stdout,
-			"%02d:%02d:%02d\n%02d/%02d/%04d\n", 
-			info_tiempo -> tm_hour,
-			info_tiempo -> tm_min,
-			info_tiempo -> tm_sec,
-			info_tiempo -> tm_mday,
-			info_tiempo -> tm_mon + 1,
-			info_tiempo -> tm_year + 1900); 
 	}else{
 		fprintf(stderr, "An unknown option has been introduced in date\n");
 	}
 }
 void historic(char comando[], char *partes_comando[]){
 	const char * opt = partes_comando[1];
-	char *p = strchr(opt, '-');
+	char *p;
 
-	if(!p){
+	if(!opt){
+		imprimirListaHistorico(-1);
+	}else{ 
+		p = strchr(opt, '-');
+		if(!p){
 		//no se encuentra -
 		//repetimos el comando n-esimo
-		posHistorico m = buscarN(atoi(opt));
-		if(!m){
-			//el elemento no existe
-			fprintf(stderr, "El comando %d no existe", atoi(opt));
-			return;
-		}else{
-		
-			char *command = m ->data;
-			char **command_parts = m -> data_parts;
-			procesarEntrada(command, command_parts);
-		}
+			posHistorico m = buscarN(atoi(opt));
+			if(!m){
+				//el elemento no existe
+				fprintf(stderr, "No existe ningun comando en la posicion %d del historico\n", atoi(opt));
+				return;
+			}else{
+				procesarEntrada(m -> data, m -> data_parts);
+			}
 
-	}else if(p){
-		int lim = atoi(++p);
-		imprimirListaHistorico(lim);
-	}else if(!opt){
-		imprimirListaHistorico(-1);
+		}else{
+			int lim = atoi(++p);
+			imprimirListaHistorico(lim);
+	
+		}
 	}
 }
+/*
+funciones de control de archivos
+*/
+
 void open_aux(char comando[], char *partes_comando[]);
 void close_df(char comando[], char *partes_comando[]);
 void dup_aux(char comando[], char *partes_comando[]);
+
+
 void infosys(){
 
 	struct utsname buffer;
@@ -119,16 +125,16 @@ void infosys(){
 		fprintf(stderr, "An error has ocurred while using uname\n");
 		return;
 	}
-	printf("SO: 				%s\n", buffer.sysname);
-    printf("Nodename:   		%s\n", buffer.nodename);
-    printf("Release:           	%s\n", buffer.release);
-    printf("Versión:           	%s\n", buffer.version);
-    printf("Arch:      			%s\n", buffer.machine);
+	printf("SO:%s\n", buffer.sysname);
+    printf("Nodename:%s\n", buffer.nodename);
+    printf("Release:%s\n", buffer.release);
+    printf("Versión:%s\n", buffer.version);
+    printf("Arch:%s\n", buffer.machine);
 
 }
 
 void help_cmd(char comando[], char *partes_comando[]){
-	return;
+	fprintf(stderr, "Not imlpemented yet.\n");
 }
 
 void quit(){

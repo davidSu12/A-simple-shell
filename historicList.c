@@ -1,6 +1,8 @@
 #include "historicList.h"
 
 
+
+
 static listaHistorico lista;
 
 /*
@@ -97,15 +99,70 @@ bool isEmptyList(){
 	return lista == LNULL; 
 }
 
-bool insertItem(const char * cadena, const char * partes_cadena[]){
+
+bool insertItem(const char * cadena, char *partes_cadena[]){
 
 	posHistorico temp = malloc(sizeof(struct node));
 	posHistorico i;
+
+
+#ifdef DEBUG
+
+	int a = 0;
+	printf("Estoy aqui\n");
+	while(partes_cadena[a] != NULL){
+		printf("%s\n", partes_cadena[a]);
+		a++;
+	}
+#endif	 
+
 	if(temp){
-		strcpy(temp -> data, cadena);
-		memcpy(temp -> data_parts, partes_cadena, sizeof(temp -> data_parts));
+
+		int j = 1;
+		char *fin;
+		const char *ini;
+		int distance;
+
+		memcpy(temp -> data, cadena, sizeof(char) * MAX_LEN);
+		
+		char * aux = temp -> data;
+		
+		ini = partes_cadena[0];
+		temp -> data_parts[0] = temp -> data;
+
+
+
+		while(fin != NULL){
+			
+				ini = partes_cadena[j-1];
+				fin = partes_cadena[j];
+
+				if(fin){
+				
+					distance = fin - ini;
+					aux += distance;
+
+					temp -> data_parts[j] = aux;
+
+					j++;
+				}
+
+			}
+
 		temp -> next = LNULL;
 
+#ifdef DEBUG
+		
+		int b = 0;
+
+		printf("Estoy en insertar elemento\n");
+
+		while(temp -> data_parts[b] != LNULL){
+			printf("%s\n", temp ->data_parts[b]);
+			b++;
+		}
+#endif
+	
 		if(isEmptyList()){
 			lista = temp;
 		}else{
@@ -114,11 +171,23 @@ bool insertItem(const char * cadena, const char * partes_cadena[]){
 		}
 		return true;
 
+	
 	}
 	fprintf(stderr, "There is no more memory for historicList\n");
 	fprintf(stderr, "Flushing historic list...\n");
 	deleteListHistoric();
 	return false;
+}
+
+
+static void imprimirPartesCadena(char *cadena_partes[]){
+
+	int j = 0;
+	while(cadena_partes[j] != NULL){
+		printf("%s ", cadena_partes[j++]);
+	}
+	printf("\n");
+
 }
 
 void imprimirListaHistorico(int n){
@@ -130,14 +199,21 @@ void imprimirListaHistorico(int n){
 	si n = -1 imprimimos la lsita entera
 	en otro caso imprimimos los n-esimos primeros
 	*/
-
+	if(isEmptyList()){
+		return;
+	}
 	if(n == -1){
+
+	
 		for(;temp != LNULL; temp = temp -> next){
-			printf("%d->%s\n",++i,temp->data);
+			printf("%d->",i++);
+			imprimirPartesCadena(temp -> data_parts);
 		}
+
 	}else{
 		for(;temp != LNULL && i <= n; temp = temp -> next){
-			printf("%d->%s\n",++i, temp->data);
+			printf("%d->",i++);
+			imprimirPartesCadena(temp -> data_parts);
 		}
 	}
 }

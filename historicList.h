@@ -22,7 +22,7 @@ typedef char item;
 
 struct node{
 	item data[MAX_LEN];
-	item * data_parts[MAX_ARG]; 
+	item *data_parts[MAX_ARG];
 	struct node * next;
 };
 
@@ -31,7 +31,7 @@ typedef posHistorico listaHistorico;
 
 
 void createEmptyListHistoric();
-bool insertItem(const char * cadena, const char * partes_cadena[]);
+bool insertItem(const char * cadena, char *partes_cadena[]);
 void deleteItem(const char * cadena);
 posHistorico searchItem(const char * cadena);
 posHistorico next(posHistorico position);

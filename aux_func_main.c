@@ -49,6 +49,11 @@ void procesarEntrada(char comando[], char *partes_comando[]){
 		perror("An error has courred");
 		exit(EXIT_FAILURE);
 	}
+
+	if(codigo_comando != 5){
+		insertItem(comando, partes_comando);
+	}
+
 	switch(codigo_comando){
 		//aqui es donde ejecutamos el comando
 		case 0://authors
@@ -67,6 +72,7 @@ void procesarEntrada(char comando[], char *partes_comando[]){
 			date_aux(comando, partes_comando);
 			break;
 		case 5://historic
+			historic(comando, partes_comando);
 			break;
 		case 6://open
 			break;
